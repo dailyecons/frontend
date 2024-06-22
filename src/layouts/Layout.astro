@@ -1,4 +1,9 @@
 ---
+import '@fontsource-variable/noto-serif-georgian';
+import '@fontsource/questrial';
+
+import Navbar from '../components/Navbar.astro';
+
 interface Props {
 	title: string;
 	description: string;
@@ -8,7 +13,7 @@ const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang='en' data-theme='dark'>
+<html lang='en' data-theme='light'>
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -19,19 +24,12 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<Navbar />
 		<slot />
 	</body>
 </html>
 <style is:global>
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+	* {
+		@apply font-georgian
 	}
 </style>

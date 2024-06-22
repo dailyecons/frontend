@@ -3,7 +3,11 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title='Dailyecons' description='Dailyecons home'>
-	<div>
-    <button class='btn'>Hello daisyUI</button>
+	<div class='hero w-screen min-h-screen'>
+	  <div class='w-full h-full absolute bg-[url("/assets/background.webp")] bg-cover -z-1'></div>
+	  <div class='hero-content bg-primary flex-col py-8 px-40'>
+	    <h1 class='font-semibold text-7xl tracking-wider'>Daily Econs</h1>
+	    <p class='text-neutral-content'>Exploring the World of Economics</p>
+	  </div>
   </div>
-</Layout>	
+</Layout>
