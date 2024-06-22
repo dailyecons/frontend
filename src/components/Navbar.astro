@@ -1,13 +1,28 @@
-<div class='navbar fixed bg-primary font-questrial text-sm px-12 py-3 z-[999]'>
-  <div class='flex-1'>
-    <a class='btn'>HOME</a> 
+<div class='navbar fixed bg-primary font-questrial text-sm px-4 md:px-12 py-3 z-[999] justify-between md:justify-center'>
+  <div class='flex-1 hidden md:flex'>
+    <a class='btn' href='/'>HOME</a> 
     <div class='divider divider-horizontal'></div>
-    <a class='btn'>BLOG</a> 
+    <a class='btn' href='/blog'>BLOG</a> 
     <div class='divider divider-horizontal'></div>
-    <a class='btn'>ABOUT</a> 
+    <a class='btn' href='/about'>ABOUT</a> 
     <div class='divider divider-horizontal'></div>
-    <a class='btn'>NEWS</a> 
+    <a class='btn' href='/news'>NEWS</a> 
   </div>
+
+  <details class='dropdown'>
+    <summary tabindex='0' role='button' class='btn btn-ghost md:hidden'>
+      <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h8m-8 6h16' />
+      </svg>
+    </summary>
+
+    <ul tabindex='0' class='menu dropdown-content mt-3 p-2 shadow rounded-box bg-primary'>
+      <li><a class='btn' href='/'>HOME</a></li>
+      <li><a class='btn' href='/blog'>BLOG</a></li>
+      <li><a class='btn' href='/about'>ABOUT</a></li>
+      <li><a class='btn' href='/news'>NEWS</a></li>
+    </ul>
+  </details>
 
   <div class='flex-none gap-2'>
     <form class='form-control'>
