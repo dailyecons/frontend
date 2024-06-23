@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/noto-serif-georgian';
+import '@fontsource-variable/lora';
 import '@fontsource/questrial';
 
 import Navbar from '../components/Navbar.astro';
@@ -8,9 +8,11 @@ import Footer from '../components/Footer.astro';
 interface Props {
 	title: string;
 	description: string;
+
+	fixPosition?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, fixPosition } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -22,11 +24,13 @@ const { title, description } = Astro.props;
 		<meta name='generator' content={Astro.generator} />
 
 		<meta name='description' content={description} />
-		<title>{title}</title>
+		<title>{title + ' | Daily Econs'}</title>
 	</head>
 	<body>
 		<Navbar />
-		<slot />
-		<Footer />
+		{fixPosition === true 
+			? <div class='absolute top-[72px] w-full'><slot /><Footer /></div> 
+			: <><slot /><Footer /></>
+		}
 	</body>
 </html>
