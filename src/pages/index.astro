@@ -1,13 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Layout title='Home' description='Homepage'>
-	<div class='hero h-screen font-lora'>
-	  <div class='w-full h-full bg-[url("/assets/background.webp")] bg-cover bg-fixed -z-1'></div>
-	  <div class='hero-content w-screen bg-primary flex-col py-8 lg:px-40'>
-	    <h1 class='font-medium text-7xl text-center tracking-wider'>Daily Econs</h1>
-	    <p class='text-neutral-content'>Exploring the World of Economics</p>
-	  </div>
+	<Hero />
+	<div class='my-24 p-12 w-full flex flex-col items-center' id='about'>
+    <div class='max-w-lg flex flex-col mb-60'>
+      <h1>Welcome to Daily Econs</h1>
+      <p>
+        Daily Econs is your go-to source for insightful analysis, news, and commentary on various economic topics. 
+        Our passion for economics drives us to provide you with valuable information and unique perspectives.
+        Stay updated with the latest releases and upcoming economic trends. We value your feedback, so feel free 
+        to connect with us in our forum and share your thoughts. If you seek professional economic insights, our team of experts is here to help. 
+        Keep up with the latest economic trends and tips in our blog!
+      </p>
+    </div>
   </div>
 </Layout>
+
+<style>
+  h1 {
+    @apply text-primary font-lora text-3xl font-semibold
+  }
+
+  * {
+    @apply text-primary tracking-wider
+  }
+
+  p {
+    @apply font-lora mt-12 text-lg font-extralight
+  }
+</style>
