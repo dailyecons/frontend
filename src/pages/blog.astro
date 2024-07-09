@@ -1,11 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Posts from '../components/blog/Posts';
+import getPosts from '../components/blog/getPosts';
+
+const list = await getPosts(-1);
 ---
 
-<Layout title='Blog' description='Blog' fixPosition={true}>
+<Layout title='Blog' description='Blog' fixPosition>
   <div class='my-12 w-full flex flex-col items-center'>
     <h1 class='text-primary font-lora text-4xl font-medium'>All Posts</h1>
-    <Posts />
+
+    {/** @ts-expect-error You can't type this somehow */}
+    <Posts list={list} client:load />
   </div>
 </Layout> 

@@ -1,14 +1,17 @@
-import { formatMsLong } from '@bit-js/ms';
+import { formatMsShort } from '@bit-js/ms';
+import getDescription from '../../utils/getDescription';
 
 export default interface Post {
+  id: number;
+
   title: string;
-  description: string;
+  content: string;
   date: string;
   author: string;
 
   readTimeApproximation: number;
 
-  bannerImageLink: string;
+  bannerLink: string;
   avatarLink: string;
 
   views: number;
@@ -17,9 +20,8 @@ export default interface Post {
 export default function Post(props: Post) {
   return (
     <div class='card md:card-side max-w-lg md:max-w-none md:h-72 rounded-none border border-[#B3B3B3]'>
-
       <figure class='max-h-72 md:max-h-none'>
-        <img src={props.bannerImageLink} alt='Banner' class='w-full md:w-72 md:h-full' />
+        <img src={props.bannerLink} alt='Banner' class='w-full md:w-72 md:h-full' />
       </figure>
 
       <div class='card-body text-primary font-lora tracking-wider md:w-[30rem]'>
@@ -30,12 +32,12 @@ export default function Post(props: Post) {
 
           <p class='ml-4 text-sm'>
             {props.author} <br />
-            {props.date} - {formatMsLong(props.readTimeApproximation)} read
+            {props.date} - {formatMsShort(props.readTimeApproximation)}
           </p>
         </div>
 
-        <h2 class='card-title text-1.5xl font-medium'>{props.title}</h2>
-        <p class='text-light mt-4'>{props.description}</p>
+        <a class='card-title text-1.5xl font-medium cursor-pointer' href={`/post/${props.id}`}>{props.title}</a>
+        <p class='text-light mt-4'>{getDescription(props.content)}</p>
       </div>
     </div>
   );
