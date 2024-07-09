@@ -26,7 +26,7 @@ const post: Post | null = await fetch(`https://dailyecons.onrender.com/api/post/
         </div>
 
         <h1 class='text-primary text-5xl font-semibold my-12 font-lora'>{post.title}</h1>
-        <article set:html={marked.parse(post.content)} class='flex flex-col space-y-10 text-lg text-justify items-center' />
+        <article set:html={marked.parse(post.content)} class='flex flex-col space-y-10 text-lg items-center' />
       </main>
     }
   </div> 
