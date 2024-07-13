@@ -11,6 +11,7 @@ export default defineConfig({
   adapter: cloudflare(),
 
   prefetch: {
+    defaultStrategy: 'load',
     prefetchAll: true
   }
 });
