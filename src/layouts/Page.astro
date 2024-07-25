@@ -1,0 +1,29 @@
+---
+import '@fontsource-variable/lora';
+import '@fontsource/questrial';
+
+interface Props {
+	title: string;
+	description: string;
+
+	fixPosition?: boolean;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang='en' data-theme='light'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='generator' content={Astro.generator} />
+
+		<meta name='description' content={description} />
+		<title>{title + ' | Daily Econs'}</title>
+	</head>
+	<body>
+	  <slot />
+	</body>
+</html>

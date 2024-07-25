@@ -1,7 +1,5 @@
 ---
-import '@fontsource-variable/lora';
-import '@fontsource/questrial';
-
+import Page from './Page.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
@@ -16,21 +14,11 @@ const { title, description, fixPosition } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang='en' data-theme='light'>
-	<head>
-		<meta charset='UTF-8' />
-		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='generator' content={Astro.generator} />
+<Page title={title} description={description}>
+	<Navbar />
+	{fixPosition === true 
+		? <div class='absolute top-[72px] w-full'><slot /><Footer /></div> 
+		: <><slot /><Footer /></>
+	}
+</Page>
 
-		<meta name='description' content={description} />
-		<title>{title + ' | Daily Econs'}</title>
-	</head>
-	<body>
-		<Navbar />
-		{fixPosition === true 
-			? <div class='absolute top-[72px] w-full'><slot /><Footer /></div> 
-			: <><slot /><Footer /></>
-		}
-	</body>
-</html>

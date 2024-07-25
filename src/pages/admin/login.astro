@@ -1,0 +1,46 @@
+---
+import Page from '../../layouts/Page.astro';
+---
+
+<Page title='Admin login' description='Log in' fixPosition>
+  <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
+    <label class='form-control w-full max-w-xs'>
+      <div class='label'>
+        <span class='label-text'>Name</span>
+      </div>
+      <input type='text' name='name' placeholder='Enter your username' class='input input-bordered border-primary w-full max-w-xs' />
+    </label>
+
+    <label class='form-control w-full max-w-xs'>
+      <div class='label'>
+        <span class='label-text'>Password</span>
+      </div>
+      <input type='password' name='password' placeholder='Enter your password' class='input input-bordered border-primary w-full max-w-xs' />
+    </label>
+
+    <button class='btn btn-primary btn-active w-full max-w-xs' type='submit'>Submit</button>
+  </form>
+
+  <script>
+    document.querySelector('form')!.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const res = await fetch('https://dailyecons.onrender.com/api/admin/account/login', {
+        method: 'POST',
+        body: new FormData(this)
+      });
+
+      if (res.ok) {
+        alert('Log in successfully!');
+        location.href = '/admin/dashboard';
+      } else 
+        alert('Incorrect username or password');
+    });
+  </script>
+
+  <style>
+    input {
+      @apply text-primary
+    }
+  </style>
+</Page>
