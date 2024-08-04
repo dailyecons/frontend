@@ -25,12 +25,15 @@ import Page from '../../layouts/Page.astro';
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
 
-      const res = await fetch('https://dailyecons.onrender.com/api/admin/account/login', {
+      const res = await fetch('/api/admin/account/login', {
         method: 'POST',
         body: new FormData(this)
       });
 
       if (res.ok) {
+        const token = await res.text();
+        sessionStorage.setItem('token', token);
+
         alert('Log in successfully!');
         location.href = '/admin/dashboard';
       } else 

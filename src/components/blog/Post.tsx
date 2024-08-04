@@ -36,7 +36,7 @@ export default function Post(props: Post) {
           </p>
         </div>
 
-        <a class='card-title text-1.5xl font-medium cursor-pointer' href={`/post/${props.id}`}>{props.title}</a>
+        <a class='card-title text-1.5xl font-medium cursor-pointer' href={`./blog/${props.id}`}>{props.title}</a>
         <p class='text-light mt-4'>{getDescription(props.content)}</p>
       </div>
     </div>
