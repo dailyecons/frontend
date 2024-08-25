@@ -1,15 +1,16 @@
 import { defineConfig } from 'astro/config';
 import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
-import netlify from "@astrojs/netlify";
+
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [solidJs(), tailwind()],
   output: 'server',
-  adapter: netlify(),
   prefetch: {
     defaultStrategy: 'load',
     prefetchAll: true
-  }
+  },
+  adapter: cloudflare()
 });
