@@ -7,7 +7,7 @@ export function extractPosts(res: Response): Promise<Post[]> | undefined {
 export function handleFetchError() { };
 
 export function getPosts(startID: number) {
-  return fetch(`/api/post/get?startID=${startID}&limit=10`)
+  return fetch(`https://dailyecons.onrender.com/api/post/get?startID=${startID}&limit=10`)
     .then(extractPosts)
     .catch(handleFetchError);
 }

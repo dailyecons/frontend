@@ -11,16 +11,5 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'load',
     prefetchAll: true
-  },
-  vite: {
-    server: {
-      proxy: {
-        '/api': {
-          target: 'https://dailyecons.onrender.com',
-          changeOrigin: true,
-          secure: false
-        }
-      }
-    }
   }
 });

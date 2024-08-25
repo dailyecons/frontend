@@ -38,7 +38,7 @@ import Page from '../../../layouts/Page.astro';
       document.querySelector('form')!.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const res = await fetch('/api/post/create', {
+        const res = await fetch('https://dailyecons.onrender.com/api/post/create', {
           method: 'POST',
           body: new FormData(this),
           headers: { Authorization: token }
