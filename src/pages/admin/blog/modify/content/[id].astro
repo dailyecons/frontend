@@ -1,0 +1,50 @@
+---
+import Page from '../../../../../layouts/Page.astro';
+import type Post from '../../../../../components/blog/Post';
+
+const id = Astro.params.id;
+
+const content = (await (await fetch(`https://dailyecons.onrender.com/api/post/get/${id}`)).json() as Post).content;
+---
+
+<Page title='Change content' description='Change content' fixPosition>
+  <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
+    <label class='form-control w-full max-w-xl'>
+      <textarea id='content-input' class='textarea textarea-bordered h-96 w-92' placeholder='Post content'>{content}</textarea>
+    </label>
+
+    <button class='btn btn-primary btn-active w-full max-w-xl' type='submit'>Submit</button>
+  </form>
+
+  <span id='post-id' style='display:none'>{id}</span>
+  <script>
+    import { getAdminToken } from '../../../../../utils/getToken';
+    const token = getAdminToken();
+
+    const postId = document.getElementById('post-id')!.innerText;
+    const contentEl = document.getElementById('content-input')! as HTMLTextAreaElement;
+
+    document.querySelector('form')!.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const res = await fetch('https://dailyecons.onrender.com/api/post/update/content/' + postId, {
+        method: 'POST',
+        body: contentEl.value,
+        headers: { Authorization: token }
+      });
+
+      if (res.ok) {
+        alert('Post content updated successfully!');
+        location.href = '/admin/blog/' + postId;
+      } else 
+        alert('Content updated failed!');
+    });
+  </script>
+
+  <style>
+    input, textarea {
+      @apply text-primary
+    }
+  </style>
+</Page>
+

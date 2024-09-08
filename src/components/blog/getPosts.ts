@@ -1,3 +1,5 @@
+import { getAdminToken } from "../../utils/getToken";
+
 // @ts-expect-error Return undefined if result is not ok
 export function extractPosts(res: Response): Promise<Post[]> | undefined {
   if (res.ok) return res.json();
@@ -15,15 +17,9 @@ export function getPosts(startID: number) {
 export function getPostsFromAdmin(startID: number) {
   // Don't fetch more
   if (startID !== -1) return;
-  const token = sessionStorage.getItem('token');
+  const token = getAdminToken();
 
-  if (token === null) {
-    alert('Session expired! Please log in again!');
-    location.href = '/admin/login';
-    return;
-  }
-
-  return fetch('/api/admin/posts', {
+  return fetch('https://dailyecons.onrender.com/api/admin/posts', {
     headers: { Authorization: token },
   })
     .then(extractPosts)
