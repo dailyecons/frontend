@@ -1,0 +1,33 @@
+const API_URL = import.meta.env.PROD ? 'https://dailyecons.onrender.com/api' : 'http://localhost:3000/api';
+
+export function saveAdminToken(token: string) {
+  sessionStorage.setItem('token', token);
+}
+
+export function adminFetch(url: string, init?: RequestInit) {
+  const Authorization = sessionStorage.getItem('token');
+  if (Authorization === null) {
+    alert('Session expired! Please log in again!');
+    location.href = '/admin/login';
+    return;
+  }
+
+  if (typeof init === 'undefined')
+    return fetch(API_URL + url, {
+      headers: { Authorization }
+    });
+
+  if (typeof init.headers === 'undefined')
+    return fetch(API_URL + url, {
+      headers: { Authorization },
+      ...init
+    });
+
+  // @ts-ignore
+  init.headers.Authorization = Authorization;
+  return fetch(API_URL + url, init);
+}
+
+export function normalFetch(url: string, init?: RequestInit) {
+  return fetch(API_URL + url, init);
+}

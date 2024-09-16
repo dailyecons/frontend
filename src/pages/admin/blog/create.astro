@@ -29,17 +29,14 @@ import Page from '../../../layouts/Page.astro';
   </form>
 
   <script>
-    import { getAdminToken } from '../../../utils/getToken';
-
-    const token = getAdminToken();
+    import { adminFetch } from '../../../utils/fetch';
  
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
 
-      const res = await fetch('https://dailyecons.onrender.com/api/post/create', {
+      const res = await adminFetch('/post/create', {
         method: 'POST',
-        body: new FormData(this),
-        headers: { Authorization: token }
+        body: new FormData(this)
       });
 
       if (res.ok) {

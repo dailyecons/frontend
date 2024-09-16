@@ -1,29 +1,27 @@
-import { getAdminToken } from "../../utils/getToken";
+import { adminFetch, normalFetch } from "../../utils/fetch";
+import type Post from "./Post";
 
 // @ts-expect-error Return undefined if result is not ok
-export function extractPosts(res: Response): Promise<Post[]> | undefined {
+export function extractPosts(res: Response) {
   if (res.ok) return res.json();
 }
 
-// Always return undefined
-export function handleFetchError() { };
-
-export function getPosts(startID: number) {
-  return fetch(`https://dailyecons.onrender.com/api/post/get?startID=${startID}&limit=10`)
-    .then(extractPosts)
-    .catch(handleFetchError);
+export async function getPosts(startId: number): Promise<Post[] | undefined> {
+  return normalFetch(`/post/get?startID=${startId}&limit=10`).then(extractPosts).catch(console.log);
 }
 
-export function getPostsFromAdmin(startID: number) {
+export async function getPost(id: string): Promise<Post | undefined> {
+  return normalFetch(`/post/get/${id}`).then(extractPosts).catch(console.log);
+}
+
+export async function getPostsFromAdmin(startID: number): Promise<Post[] | undefined> {
   // Don't fetch more
   if (startID !== -1) return;
-  const token = getAdminToken();
 
-  return fetch('https://dailyecons.onrender.com/api/admin/posts', {
-    headers: { Authorization: token },
-  })
+  // Why tf does this return 404 
+  return adminFetch('/admin/posts')
     .then(extractPosts)
-    .catch(handleFetchError);
+    .catch(console.log);
 }
 
 export type PostFetcher = typeof getPosts;

@@ -1,10 +1,8 @@
 ---
 import Page from '../../../../../layouts/Page.astro';
-import type Post from '../../../../../components/blog/Post';
+import { getPost } from '../../../../../components/blog/getPosts';
 
-const id = Astro.params.id;
-
-const content = (await (await fetch(`https://dailyecons.onrender.com/api/post/get/${id}`)).json() as Post).title;
+const content = (await getPost(Astro.params.id!))?.title;
 ---
 
 <Page title='Change title' description='Change title' fixPosition>
@@ -16,28 +14,25 @@ const content = (await (await fetch(`https://dailyecons.onrender.com/api/post/ge
     <button class='btn btn-primary btn-active w-full max-w-xl' type='submit'>Submit</button>
   </form>
 
-  <span id='post-id' style='display:none'>{id}</span>
   <script>
-    import { getAdminToken } from '../../../../../utils/getToken';
-    const token = getAdminToken();
+    import { adminFetch } from '../../../../../utils/fetch';
 
-    const postId = document.getElementById('post-id')!.innerText;
     const contentEl = document.getElementById('content-input')! as HTMLTextAreaElement;
+    const id = Astro.params.id!;
 
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
 
-      const res = await fetch('https://dailyecons.onrender.com/api/post/update/title/' + postId, {
+      const res = await adminFetch(`/post/update/title/${id}`, {
         method: 'POST',
         body: contentEl.value,
-        headers: { Authorization: token }
       });
 
       if (res.ok) {
         alert('Post title updated successfully!');
-        location.href = '/admin/blog/' + postId;
+        location.href = `/admin/blog/${id}`;
       } else 
-        alert('Title updated failed!');
+        alert('Content updated failed!');
     });
   </script>
 

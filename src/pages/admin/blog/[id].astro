@@ -1,21 +1,19 @@
 ---
-import type Post from '../../../components/blog/Post';
 import Layout from '../../../layouts/Layout.astro';
 
 import getDescription from '../../../utils/getDescription';
+import { getPost } from '../../../components/blog/getPosts';
 import { marked } from 'marked';
 import { formatMsShort } from '@bit-js/ms';
 
 const id = Astro.params.id;
 
-const post: Post | null = await fetch(`https://dailyecons.onrender.com/api/post/get/${id}`)
-  .then((res) => res.ok ? res.json() : null)
-  .catch(() => null);
+const post = await getPost(Astro.params.id!);
 ---
 
 <Layout title={post?.title ?? 'Error loading post'} description={getDescription(post?.content ?? 'Error loading post')} fixPosition>
   <div class='min-h-screen xl:px-[30%] lg:px-[25%] md:px-[15%] px-[5%] py-16'>  
-    {post === null 
+    {typeof post === 'undefined' 
       ? <p>Error loading post!</p>
       : <main>
         <div class='avatar'>

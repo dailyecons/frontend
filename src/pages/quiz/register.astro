@@ -18,11 +18,13 @@ export const prerender = true;
       </form>
 
       <script>
+        import { saveUser } from '../../utils/user';
+
         const content = document.getElementById('content-input') as HTMLInputElement;
 
         document.getElementById('set-name')!.addEventListener('submit', (event) => {
           event.preventDefault();
-          localStorage.setItem('user', content.value);
+          saveUser(content.value);
         });
       </script>
     </div>

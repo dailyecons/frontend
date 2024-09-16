@@ -22,18 +22,18 @@ import Page from '../../layouts/Page.astro';
   </form>
 
   <script>
+    import { normalFetch, saveAdminToken } from '../../utils/fetch';
+
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
 
-      const res = await fetch('https://dailyecons.onrender.com/api/admin/account/login', {
+      const res = await normalFetch('/admin/account/login', {
         method: 'POST',
         body: new FormData(this)
       });
 
       if (res.ok) {
-        const token = await res.text();
-        sessionStorage.setItem('token', token);
-
+        saveAdminToken(await res.text());
         alert('Log in successfully!');
         location.href = '/admin/dashboard';
       } else 

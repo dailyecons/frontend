@@ -36,7 +36,7 @@ export default function Posts(props: Props) {
         <Show when={loadedPosts().length !== 0} fallback={<p class='text-primary'>Loading posts...</p>}>
           <For each={loadedPosts()}>{Post}</For>
         </Show>
-        <button class='btn btn-primary' onMouseDown={loadMorePosts}>Load more posts...</button>
+        {props.fromAdmin === true ? <a href='/admin/blog/create' class='btn btn-primary'>Create a post</a> : <button class='btn btn-primary' onMouseDown={loadMorePosts}>Load more posts...</button>}
       </div>
     </div>
   );
