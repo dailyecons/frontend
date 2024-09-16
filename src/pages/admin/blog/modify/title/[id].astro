@@ -2,13 +2,14 @@
 import Page from '../../../../../layouts/Page.astro';
 import { getPost } from '../../../../../components/blog/getPosts';
 
-const content = (await getPost(Astro.params.id!))?.title;
+const id = Astro.params.id!;
+const content = (await getPost(id!))?.title;
 ---
 
 <Page title='Change title' description='Change title' fixPosition>
   <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
     <label class='form-control w-full max-w-xl'>
-      <input id='content-input' class='input input-bordered border-primary w-full' placeholder='Post title' value={content}>
+      <input id='content-input' class='input input-bordered border-primary w-full' placeholder='Post title' value={content} data-target={id}>
     </label>
 
     <button class='btn btn-primary btn-active w-full max-w-xl' type='submit'>Submit</button>
@@ -18,7 +19,7 @@ const content = (await getPost(Astro.params.id!))?.title;
     import { adminFetch } from '../../../../../utils/fetch';
 
     const contentEl = document.getElementById('content-input')! as HTMLTextAreaElement;
-    const id = Astro.params.id!;
+    const id = contentEl.dataset.target;
 
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -28,7 +29,7 @@ const content = (await getPost(Astro.params.id!))?.title;
         body: contentEl.value,
       });
 
-      if (res.ok) {
+      if (res?.ok) {
         alert('Post title updated successfully!');
         location.href = `/admin/blog/${id}`;
       } else 

@@ -4,12 +4,12 @@ export function saveAdminToken(token: string) {
   sessionStorage.setItem('token', token);
 }
 
-export function adminFetch(url: string, init?: RequestInit) {
+export function adminFetch(url: string, init?: RequestInit): Promise<Response> {
   const Authorization = sessionStorage.getItem('token');
   if (Authorization === null) {
     alert('Session expired! Please log in again!');
     location.href = '/admin/login';
-    return;
+    return null!;
   }
 
   if (typeof init === 'undefined')

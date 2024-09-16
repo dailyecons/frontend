@@ -8,7 +8,7 @@ const content = (await getPost(Astro.params.id!))?.content;
 <Page title='Change content' description='Change content' fixPosition>
   <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
     <label class='form-control w-full max-w-xl'>
-      <textarea id='content-input' class='textarea textarea-bordered h-96 w-92' placeholder='Post content'>{content}</textarea>
+      <textarea id='content-input' class='textarea textarea-bordered h-96 w-92' placeholder='Post content' data-target={Astro.params.id!}>{content}</textarea>
     </label>
 
     <button class='btn btn-primary btn-active w-full max-w-xl' type='submit'>Submit</button>
@@ -18,7 +18,7 @@ const content = (await getPost(Astro.params.id!))?.content;
    import { adminFetch } from '../../../../../utils/fetch';
 
     const contentEl = document.getElementById('content-input')! as HTMLTextAreaElement;
-    const id = Astro.params.id!;
+    const id = contentEl.dataset.target;
 
     document.querySelector('form')!.addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -28,7 +28,7 @@ const content = (await getPost(Astro.params.id!))?.content;
         body: contentEl.value,
       });
 
-      if (res.ok) {
+      if (res?.ok) {
         alert('Post content updated successfully!');
         location.href = `/admin/blog/${id}`;
       } else 
