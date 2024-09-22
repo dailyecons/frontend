@@ -25,7 +25,7 @@ const content = (await getPost(id!))?.title;
       event.preventDefault();
 
       const res = await adminFetch(`/post/update/title/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         body: contentEl.value,
       });
 

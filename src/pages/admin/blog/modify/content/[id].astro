@@ -24,7 +24,7 @@ const content = (await getPost(Astro.params.id!))?.content;
       event.preventDefault();
 
       const res = await adminFetch(`/post/update/content/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         body: contentEl.value,
       });
 
