@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPost } from '../../components/blog/getPosts';
+
+import getDescription from '../../utils/getDescription';
+import { marked } from 'marked';
+import { formatMsShort } from '@bit-js/ms';
+
+interface Props {
+  id: any;
+  isAdmin?: boolean;
+}
+
+const itemsStyling = '<style>article img{display:block;margin-left:auto;margin-right:auto}article>h1{font-size:2.25rem;line-height:2.5rem;font-weight:bold}article>ul{list-style-type:disc;margin:0 0 1rem 2rem}article>p{margin-top:2.5rem}</style>';
+
+const id = Astro.props.id;
+const post = await getPost(id); 
+const isAdmin = Astro.props.isAdmin === true;
+---
+
+<Layout title={post?.title ?? 'Error loading post'} description={getDescription(post?.content ?? 'Error loading post', post?.title ?? '')} fixPosition>
+  <div class='min-h-screen xl:px-[30%] lg:px-[25%] md:px-[15%] px-[5%] py-16'>  
+    {typeof post === 'undefined'
+      ? <p>Error loading post!</p>
+      : <main>
+        <div class='avatar'>
+          <div class='w-8 h-8 rounded-full'>
+            <img src={post.avatarLink} alt='Author avatar' />
+          </div>
+
+          <p class='mr-2'>{post.author}</p>
+          <p>{post.date} - {formatMsShort(post.readTimeApproximation)}</p>
+        </div>
+
+        {isAdmin 
+          ? <>
+            <a href=`/admin/blog/modify/title/${id}`>Edit title</a>
+            <a href=`/admin/blog/modify/content/${id}`>Edit content</a>
+          </> : <></>
+        }
+
+        <h1 class='text-primary text-5xl font-semibold my-12 font-lora'>{post.title}</h1>
+        <article set:html={marked.parse(post.content) + itemsStyling} class='flex flex-col text-lg' />
+      </main>
+    }
+  </div> 
+</Layout>
+<style>
+  * {
+    @apply text-primary tracking-wider font-lora 
+  }
+
+  .avatar > p {
+    @apply ml-5 grid place-content-center
+  } 
+</style>

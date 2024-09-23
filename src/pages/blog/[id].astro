@@ -1,40 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getPost } from '../../components/blog/getPosts';
-
-import getDescription from '../../utils/getDescription';
-import { marked } from 'marked';
-import { formatMsShort } from '@bit-js/ms';
-
-const post = await getPost(Astro.params.id!); 
+import Display from '../../components/blog/Display.astro';
 ---
 
-<Layout title={post?.title ?? 'Error loading post'} description={getDescription(post?.content ?? 'Error loading post')} fixPosition>
-  <div class='min-h-screen xl:px-[30%] lg:px-[25%] md:px-[15%] px-[5%] py-16'>  
-    {typeof post === 'undefined'
-      ? <p>Error loading post!</p>
-      : <main>
-        <div class='avatar'>
-          <div class='w-8 h-8 rounded-full'>
-            <img src={post.avatarLink} alt='Author avatar' />
-          </div>
+<Display id={Astro.params.id} /> 
 
-          <p class='mr-2'>{post.author}</p>
-          <p>{post.date} - {formatMsShort(post.readTimeApproximation)}</p>
-        </div>
-
-        <h1 class='text-primary text-5xl font-semibold my-12 font-lora'>{post.title}</h1>
-        <article set:html={marked.parse(post.content)} class='flex flex-col space-y-10 text-lg items-center' />
-      </main>
-    }
-  </div> 
-</Layout>
-<style>
-  * {
-    @apply text-primary tracking-wider font-lora 
-  }
-    
-  .avatar > p {
-    @apply ml-5 grid place-content-center
-  } 
-</style>
