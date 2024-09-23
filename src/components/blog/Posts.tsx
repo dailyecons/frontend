@@ -9,6 +9,7 @@ export interface Props {
 export default function Posts(props: Props) {
   const [loadedPosts, setLoadedPosts] = createSignal<Post[]>([], { equals: false });
   const fetchPosts = props.fromAdmin === true ? getPostsFromAdmin : getPosts;
+  const [loadMorePost, setLoadMorePost] = createSignal<boolean>(true);
 
   async function loadMorePosts() {
     const currentPosts = loadedPosts();
@@ -16,14 +17,17 @@ export default function Posts(props: Props) {
     if (currentPosts.length === 0) {
       const newPosts = await fetchPosts(-1);
 
-      if (typeof newPosts !== 'undefined')
+      if (typeof newPosts !== 'undefined') {
         setLoadedPosts(newPosts);
+        setLoadMorePost(newPosts.length > 19);
+      }
     } else {
       const newPosts = await fetchPosts(currentPosts[currentPosts.length - 1]!.id);
 
       if (typeof newPosts !== 'undefined') {
         currentPosts.push(...newPosts);
         setLoadedPosts(currentPosts);
+        setLoadMorePost(newPosts.length > 19);
       }
     }
   }
@@ -36,7 +40,10 @@ export default function Posts(props: Props) {
         <Show when={loadedPosts().length !== 0} fallback={<p class='text-primary'>Loading posts...</p>}>
           <For each={loadedPosts()}>{Post}</For>
         </Show>
-        {props.fromAdmin === true ? <a href='/admin/blog/create' class='btn btn-primary'>Create a post</a> : <button class='btn btn-primary' onMouseDown={loadMorePosts}>Load more posts...</button>}
+        {props.fromAdmin === true
+          ? <a href='/admin/blog/create' class='btn btn-primary'>Create a post</a>
+          : loadMorePost() ? <button class='btn btn-primary' onMouseDown={loadMorePosts}>Load more posts...</button> : <></>
+        }
       </div>
     </div>
   );
