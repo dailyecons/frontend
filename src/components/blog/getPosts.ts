@@ -7,7 +7,7 @@ export function extractPosts(res: Response) {
 }
 
 export async function getPosts(startId: number): Promise<Post[] | undefined> {
-  return normalFetch(`/post/get?startID=${startId}&limit=10`).then(extractPosts).catch(console.log);
+  return normalFetch(`/post/get?startID=${startId}&limit=20`).then(extractPosts).catch(console.log);
 }
 
 export async function getPost(id: string): Promise<Post | undefined> {
