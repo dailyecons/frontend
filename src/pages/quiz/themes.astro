@@ -1,0 +1,42 @@
+---
+import Quiz from '../../components/Quiz.astro';
+import { normalFetch } from '../../utils/fetch';
+
+const themes = (await (await normalFetch('/theme')).json() as { name: string }[]).map((theme) => theme.name);
+---
+
+<Quiz title='Choose a theme' description='Choose a theme'>
+	<h1 class='font-medium text-xl text-center tracking-wider'>Choose a theme</h1>
+	<form class='space-y-4 w-full flex flex-col items-center'>
+    <label class='form-control w-full max-w-xs'>
+      <select 
+        id='content-input'
+        class='select select-bordered border-primary w-full'
+      >
+        {themes.map(
+          (theme) => <option value={theme}>{theme}</option>
+        )}
+      </select>
+    </label>
+
+    <button class='btn btn-primary btn-active w-full max-w-xs' type='submit'>Enter</button>
+  </form>
+
+  <script>
+    import { getUser } from '../../utils/user';
+    getUser();
+
+    const content = document.getElementById('content-input') as HTMLSelectElement;
+
+    document.getElementById('set-name')!.addEventListener('submit', (event) => {
+      event.preventDefault();
+      location.href = `/quiz/theme/${content}`;
+    });
+  </script>
+
+  <style>
+    select {
+      @apply text-primary
+    }
+  </style>
+</Quiz>

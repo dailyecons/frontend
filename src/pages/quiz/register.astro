@@ -1,32 +1,32 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-
-export const prerender = true;
+import Quiz from '../../components/Quiz.astro';
 ---
 
-<Layout title='Register for quiz' description='Enter your username'>
-	<div class='hero h-screen'>
-	  <div class='w-full h-full bg-[url("/assets/background.webp")] bg-cover bg-fixed -z-1'></div>
-	  <div class='hero-content w-screen bg-primary flex-col py-8 lg:px-40'>
-	    <h1 class='font-medium text-xl text-center tracking-wider'>Quiz</h1>
-	    <form class='space-y-4 w-full flex flex-col items-center' id='set-name'>
-        <label class='form-control w-full max-w-xs'>
-          <input id='content-input' class='input input-bordered border-primary w-full' placeholder='Enter your username...'>
-        </label>
+<Quiz title='Register for quiz' description='Enter your username'>	    
+  <h1 class='font-medium text-xl text-center tracking-wider'>Enter your name</h1>
+	<form class='space-y-4 w-full flex flex-col items-center' id='set-name'>
+    <label class='form-control w-full max-w-xs'>
+      <input id='content-input' class='input input-bordered border-primary w-full' placeholder='Enter your username...'>
+    </label>
 
-        <button class='btn btn-primary btn-active w-full max-w-xs' type='submit'>Submit</button>
-      </form>
+    <button class='btn btn-primary btn-active w-full max-w-xs' type='submit'>Register</button>
+  </form>
 
-      <script>
-        import { saveUser } from '../../utils/user';
+  <script>
+    import { saveUser } from '../../utils/user';
 
-        const content = document.getElementById('content-input') as HTMLInputElement;
+    const content = document.getElementById('content-input') as HTMLInputElement;
 
-        document.getElementById('set-name')!.addEventListener('submit', (event) => {
-          event.preventDefault();
-          saveUser(content.value);
-        });
-      </script>
-    </div>
-  </div>
-</Layout>
+    document.getElementById('set-name')!.addEventListener('submit', (event) => {
+      event.preventDefault();
+      saveUser(content.value);
+      location.href = '/quiz/themes';
+    });
+  </script>
+
+  <style>
+    input {
+      @apply text-primary
+    }
+  </style>
+</Quiz>
