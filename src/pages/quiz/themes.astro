@@ -7,7 +7,7 @@ const themes = (await (await normalFetch('/theme')).json() as { name: string }[]
 
 <Quiz title='Choose a theme' description='Choose a theme'>
 	<h1 class='font-medium text-xl text-center tracking-wider'>Choose a theme</h1>
-	<form class='space-y-4 w-full flex flex-col items-center'>
+	<form class='space-y-4 w-full flex flex-col items-center' id='main'>
     <label class='form-control w-full max-w-xs'>
       <select 
         id='content-input'
@@ -28,9 +28,9 @@ const themes = (await (await normalFetch('/theme')).json() as { name: string }[]
 
     const content = document.getElementById('content-input') as HTMLSelectElement;
 
-    document.getElementById('set-name')!.addEventListener('submit', (event) => {
+    document.getElementById('main')!.addEventListener('submit', (event) => {
       event.preventDefault();
-      location.href = `/quiz/theme/${content}`;
+      location.href = `/quiz/theme/${content.value}`;
     });
   </script>
 

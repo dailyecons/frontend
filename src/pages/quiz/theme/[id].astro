@@ -1,0 +1,44 @@
+---
+import Quiz from '../../../components/Quiz.astro';
+import { normalFetch } from '../../../utils/fetch';
+
+const id = Astro.params.id!;
+const themes = (await (await normalFetch(`/theme/questions/${id}`)).json());
+
+const questions: Record<number, {
+  content: string,
+  answers: string[],
+  correctAnswer: number,
+  explanation: string
+}> = {};
+
+for (let i = 0, l = themes.length; i < l; i++) {
+  const data = themes[i];
+  const questionId = data.question_id;
+
+  if (typeof questions[questionId] === 'undefined') {
+    questions[questionId] = {
+      content: data.question_content,
+      answers: [data.answer_content],
+      correctAnswer: data.explanation_content === null ? -1 : 0,
+      explanation: data.explanation_content
+    };
+  } else {
+    const obj = questions[questionId];
+
+    obj.answers.push(data.answer_content);
+    if (data.explanation_content !== null) {
+      obj.correctAnswer = obj.answers.length - 1;
+      obj.explanation = data.explanation_content;
+    }
+  }
+}
+---
+
+<Quiz title={id} description=`${id} theme`>
+  <style>
+    select {
+      @apply text-primary
+    }
+  </style>
+</Quiz>
