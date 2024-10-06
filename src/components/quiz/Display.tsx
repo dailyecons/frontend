@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Show } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 
 export interface Question {
   content: string,
@@ -25,7 +25,7 @@ export function QuestionDisplay(props: { list: Question[] }) {
       <p class='text-xl text-justify mb-10'>{currentQuestion().explanation}</p>
       <button class='btn btn-primary w-full text-lg' onMouseDown={() => {
         setExplanationTitle(null);
-        setCurrentIdx(currentIdx + 1);
+        setCurrentIdx(currentIdx() + 1);
       }}>Next question</button>
     </>}>
       <Show when={typeof currentQuestion() !== 'undefined'} fallback={<>
