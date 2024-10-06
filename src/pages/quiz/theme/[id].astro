@@ -1,30 +1,26 @@
 ---
+import { QuestionDisplay, type Question } from '../../../components/quiz/Display';
 import Quiz from '../../../components/Quiz.astro';
 import { normalFetch } from '../../../utils/fetch';
 
 const id = Astro.params.id!;
 const themes = (await (await normalFetch(`/theme/questions/${id}`)).json());
 
-const questions: Record<number, {
-  content: string,
-  answers: string[],
-  correctAnswer: number,
-  explanation: string
-}> = {};
+const questionsMap: Record<number, Question> = {};
 
 for (let i = 0, l = themes.length; i < l; i++) {
   const data = themes[i];
   const questionId = data.question_id;
 
-  if (typeof questions[questionId] === 'undefined') {
-    questions[questionId] = {
+  if (typeof questionsMap[questionId] === 'undefined') {
+    questionsMap[questionId] = {
       content: data.question_content,
       answers: [data.answer_content],
       correctAnswer: data.explanation_content === null ? -1 : 0,
       explanation: data.explanation_content
     };
   } else {
-    const obj = questions[questionId];
+    const obj = questionsMap[questionId];
 
     obj.answers.push(data.answer_content);
     if (data.explanation_content !== null) {
@@ -36,6 +32,7 @@ for (let i = 0, l = themes.length; i < l; i++) {
 ---
 
 <Quiz title={id} description=`${id} theme`>
+  <QuestionDisplay list={Object.values(questionsMap)} client:load />
   <style>
     select {
       @apply text-primary

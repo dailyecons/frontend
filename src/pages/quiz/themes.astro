@@ -23,9 +23,6 @@ const themes = (await (await normalFetch('/theme')).json() as { name: string }[]
   </form>
 
   <script>
-    import { getUser } from '../../utils/user';
-    getUser();
-
     const content = document.getElementById('content-input') as HTMLSelectElement;
 
     document.getElementById('main')!.addEventListener('submit', (event) => {
