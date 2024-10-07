@@ -34,7 +34,7 @@ export function QuestionDisplay(props: { list: Question[] }) {
       </>}>
         <ul class='space-y-3'>{
           currentQuestion().answers.map((answer, idx) => <>
-            <button class='btn btn-ghost text-xl font-light' onMouseDown={() => {
+            <button class='py-2 px-3 rounded-lg btn-ghost text-xl text-left font-light max-w-full' onMouseDown={() => {
               setExplanationTitle(idx === currentQuestion().correctAnswer 
                 ? "Well done. That's a correct answer" 
                 : "Oopsies. That's incorrect"
