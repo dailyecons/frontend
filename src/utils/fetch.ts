@@ -1,4 +1,4 @@
-const API_URL = 'https://dailyecons.onrender.com/api';
+const API_URL = 'https://server-wandering-frost-9458.fly.dev/api';
 
 export function saveAdminToken(token: string) {
   sessionStorage.setItem('token', token);
