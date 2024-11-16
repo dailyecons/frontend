@@ -11,17 +11,17 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.3",
-    "@astrojs/cloudflare": "^11.0.4",
+    "@astrojs/cloudflare": "^11.2.0",
     "@astrojs/solid-js": "4.4.1",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/tailwind": "^5.1.2",
     "@bit-js/ms": "^1.0.2",
-    "@fontsource-variable/lora": "^5.0.18",
-    "@fontsource/questrial": "^5.0.13",
+    "@fontsource-variable/lora": "^5.1.0",
+    "@fontsource/questrial": "^5.1.0",
     "astro": "4.16.1",
-    "daisyui": "^4.12.2",
-    "marked": "^13.0.2",
-    "solid-js": "^1.8.17",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5"
+    "daisyui": "^4.12.14",
+    "marked": "^13.0.3",
+    "solid-js": "^1.9.3",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
   }
 }
