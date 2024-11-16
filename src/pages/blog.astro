@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Posts from '../components/blog/Posts';
 ---
 
-<Layout title='Blog' description='Blog' fixPosition>
+<Layout title='Blog' description='Blog'>
   <div class='my-12 w-full flex flex-col items-center'>
     <h1 class='text-primary font-lora text-4xl font-medium'>All Posts</h1>
     <Posts client:load />
   </div>
-</Layout> 
+</Layout>

@@ -6,19 +6,16 @@ import Footer from '../components/Footer.astro';
 interface Props {
 	title: string;
 	description: string;
-
-	fixPosition?: boolean;
 }
 
-const { title, description, fixPosition } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <Page title={title} description={description}>
 	<Navbar />
-	{fixPosition === true 
-		? <div class='absolute top-[72px] w-full'><slot /><Footer /></div> 
-		: <><slot /><Footer /></>
-	}
+	<div class='absolute top-[64px] w-full'>
+		<slot />
+		<Footer />
+	</div>
 </Page>
-

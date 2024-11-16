@@ -2,7 +2,7 @@
 import Page from '../../layouts/Page.astro';
 ---
 
-<Page title='Admin login' description='Log in' fixPosition>
+<Page title='Admin login' description='Log in'>
   <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
     <label class='form-control w-full max-w-xs'>
       <div class='label'>
@@ -36,7 +36,7 @@ import Page from '../../layouts/Page.astro';
         saveAdminToken(await res.text());
         alert('Log in successfully!');
         location.href = '/admin/dashboard';
-      } else 
+      } else
         alert('Incorrect username or password');
     });
   </script>

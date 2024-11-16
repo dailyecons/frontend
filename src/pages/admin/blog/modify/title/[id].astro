@@ -6,7 +6,7 @@ const id = Astro.params.id!;
 const content = (await getPost(id!))?.title;
 ---
 
-<Page title='Change title' description='Change title' fixPosition>
+<Page title='Change title' description='Change title'>
   <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
     <label class='form-control w-full max-w-xl'>
       <input id='content-input' class='input input-bordered border-primary w-full' placeholder='Post title' value={content} data-target={id}>
@@ -32,7 +32,7 @@ const content = (await getPost(id!))?.title;
       if (res?.ok) {
         alert('Post title updated successfully!');
         location.href = `/admin/blog/${id}`;
-      } else 
+      } else
         alert('Content updated failed!');
     });
   </script>
@@ -43,5 +43,3 @@ const content = (await getPost(id!))?.title;
     }
   </style>
 </Page>
-
-

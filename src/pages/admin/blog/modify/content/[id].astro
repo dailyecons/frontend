@@ -5,7 +5,7 @@ import { getPost } from '../../../../../components/blog/getPosts';
 const content = (await getPost(Astro.params.id!))?.content;
 ---
 
-<Page title='Change content' description='Change content' fixPosition>
+<Page title='Change content' description='Change content'>
   <form class='py-24 space-y-4 w-full min-h-screen flex flex-col items-center bg-primary'>
     <label class='form-control w-full max-w-xl'>
       <textarea id='content-input' class='textarea textarea-bordered h-96 w-92' placeholder='Post content' data-target={Astro.params.id!}>{content}</textarea>
@@ -31,9 +31,9 @@ const content = (await getPost(Astro.params.id!))?.content;
       if (res?.ok) {
         alert('Post content updated successfully!');
         location.href = `/admin/blog/${id}`;
-      } else 
+      } else
         alert('Content update failed!');
-   });  
+   });
    </script>
   <style>
     input, textarea {
@@ -41,4 +41,3 @@ const content = (await getPost(Astro.params.id!))?.content;
     }
   </style>
 </Page>
-
