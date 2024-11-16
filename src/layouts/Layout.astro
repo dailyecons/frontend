@@ -14,8 +14,6 @@ const { title, description } = Astro.props;
 <!DOCTYPE html>
 <Page title={title} description={description}>
 	<Navbar />
-	<div class='absolute top-[64px] w-full'>
-		<slot />
-		<Footer />
-	</div>
+	<slot />
+	<Footer />
 </Page>
