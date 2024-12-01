@@ -13,7 +13,9 @@ const { title, description } = Astro.props;
 
 <!DOCTYPE html>
 <Page title={title} description={description}>
-	<Navbar />
-	<slot />
-	<Footer />
+  <div class='absolute'>
+    <Navbar />
+	</div>
+  <slot />
+  <Footer />
 </Page>
