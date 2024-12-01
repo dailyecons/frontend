@@ -3,20 +3,69 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 
 export const prerender = true;
+
+export const intros = [
+  ['Kien', `
+    Hey there! I’m Kien and I’m the leader for the team behind this blog.
+    I’m in charge of creating and vetting content on the blog, ensuring
+    that all economic knowledge is accurate and engaging. One of my hobbies
+    is to think and apply classical economic theories in everyday situations
+    to optimize my decision-making. I envision this blog as a great avenue
+    for us to share these exciting applications with fellow to-be economists!`
+  ],
+  ['Tuan', `
+    Hi, I’m Tran Minh Tuan from High School for Gifted Students HNUE. If you
+    have just started to learn Economics, you may find my case relatable:
+    whenever I see a new Economics term and want to look for its explanation,
+    most of the pages I access will explain it using a lot more comprehensive
+    technical terms, and so on. Since then, I found an opportunity for me to
+    not only convey my current knowledge of Economics in such a simple, practical
+    and interesting way but also learn it a second time with more appealing
+    examples which are familiar to Vietnamese. That’s why I’m here!
+  `],
+  ['Ha Anh', `
+    Hi! I’m Ha Anh, a member of Daily Econs. My curiosity about how economic
+    principles influence our everyday decisions led me to delve deeper into
+    the subject, studying various economic theories’ real-world applications.
+    This sparked my interest in sharing economic knowledge in a way that is
+    accessible and fetching. Today, I am delighted to be in charge of creating
+    blog posts and developing an interactive theme that brings economic concepts
+    to life.  Through engaging articles and interactive content, I hope this
+    platform can help readers explore the practical applications of economic
+    theories in a fun and relatable way!
+  `],
+  ['Cuong', `
+    Hi, I’m Cuong, and I’m a writer for this blog. I hope that through my stories,
+    you will all be able to get a glimpse into the fascinating world of economics,
+    and realize that economics is not a scary or boring subject but one that is
+    closer to our daily lives than you expected.
+  `]
+];
 ---
 
 <Layout title='Home' description='Homepage'>
   <Hero />
-  <div class='my-24 p-12 w-full flex flex-col items-center' id='about'>
-    <div class='max-w-lg flex flex-col mb-60'>
-      <h1>Welcome to Daily Econs</h1>
-      <p>
-          Daily Econs is your go-to source for insightful analysis, news, and commentary on various economic topics. 
-          Our passion for economics drives us to provide you with valuable information and unique perspectives.
-          Stay updated with the latest releases and upcoming economic trends. We value your feedback, so feel free 
-          to connect with us in our forum and share your thoughts. If you seek professional economic insights, our team of experts is here to help. 
-          Keep up with the latest economic trends and tips in our blog!
+  <div class='w-full flex flex-col items-center' id='about'>
+    <div class='max-w-3xl my-12 flex flex-col'>
+      <h1 class='text-center'>Daily Econs</h1>
+      <p class='mt-8 text-lg'>
+        Daily Econs is your go-to source for insightful analysis, news, and commentary on various economic topics.
+        Our passion for economics drives us to provide you with valuable information and unique perspectives.
+        Stay updated with the latest releases and upcoming economic trends. We value your feedback, so feel free
+        to connect with us in our forum and share your thoughts. If you seek professional economic insights, our team of experts is here to help.
+        Keep up with the latest economic trends and tips in our blog!
       </p>
+    </div>
+
+    <div class='mb-12 gap-8 grid md:grid-cols-2 grid-cols-1'>
+      {intros.map((intro) =>
+        <div class="card bg-base-100 max-w-lg border-gray-500 border-[1px] rounded-none p-3">
+          <div class="card-body justify-center items-center">
+            <h2 class="card-title">{intro[0]}</h2>
+            <p class='text-[15px]'>{intro[1]}</p>
+          </div>
+        </div>
+      )}
     </div>
   </div>
 </Layout>
@@ -31,6 +80,6 @@ export const prerender = true;
   }
 
   p {
-    @apply font-lora mt-12 text-lg font-extralight
+    @apply font-lora font-extralight text-justify
   }
 </style>
