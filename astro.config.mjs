@@ -4,6 +4,8 @@ import tailwind from "@astrojs/tailwind";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import netlify from "@astrojs/netlify";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [solidJs(), tailwind()],
@@ -12,5 +14,5 @@ export default defineConfig({
     defaultStrategy: "load",
     prefetchAll: true,
   },
-  adapter: cloudflare(),
+  adapter: netlify(),
 });
